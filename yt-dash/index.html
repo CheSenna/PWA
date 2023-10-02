@@ -1,23 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <!-- Include Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-200 flex items-center justify-center h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg w-80">
-        <h1 class="text-2xl font-semibold mb-6">Login</h1>
-        <!-- Google OAuth login button (You can add your own functionality) -->
-        <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full w-full">
-            Sign in with Google
-        </button>
-        <div class="mt-4 text-center">
-            <!-- Optional: Add other login options or additional information here -->
-            <p class="text-gray-600">Don't have an account? <a href="#" class="text-blue-500">Sign up</a></p>
-        </div>
+<html>
+  <head>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+    </style>
+    <script
+      src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js"
+      defer
+    ></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <login></login>
     </div>
-</body>
+    <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.min.js"></script>
+<script>
+  const { createApp } = Vue;
+  const { createWebHistory, createRouter } = VueRouter; // Import Vue Router functions
+
+  // Import your Login component
+  import Login from './Login.vue';
+
+  // Create a new Vue 3 app
+  const app = createApp(Login);
+
+  // Mount the app to the #app element
+  app.mount('#app');
+</script>
+  </body>
 </html>
