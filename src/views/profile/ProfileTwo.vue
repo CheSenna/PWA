@@ -1,0 +1,170 @@
+<script setup>
+import Breadcrumb from '@/components/Breadcrumbs.vue';
+import { ref } from 'vue';
+
+let categories = ref(['Timeline', 'About', 'Friends', 'Photos']);
+
+const shareProfile = async () => {
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: 'Profile',
+        text: 'Check out my profile on this website!',
+        url: window.location.href,
+      });
+    } catch (error) {
+      console.error('Error sharing:', error);
+    }
+  }
+};
+
+const vibrateDevice = () => {
+  if ("vibrate" in navigator) {
+    navigator.vibrate([200, 100, 200]); // Vibrate pattern
+  }
+};
+</script>
+
+<template>
+  <div class="container mx-auto">
+    <Breadcrumb parentTitle="Profile" subParentTitle="ProfileV2" />
+    <BaseCard noPadding class="user-profile overflow-hidden relative">
+      <div class="header-cover"></div>
+      <div class="flex justify-center z-10 -m-10">
+        <div class="text-center">
+          <img
+            class="relative z-1 w-20 h-20 m-auto rounded-full border-2 border-white"
+            src="/images/faces/1.jpg"
+          />
+          <p class="text-2xl">Che Senna</p>
+          <p class="text-gray-600">Digital Artist</p>
+          <button @click="shareProfile">Share Profile</button>
+          <button @click="vibrateDevice">Vibrate</button>
+        </div>
+        <div>
+          <button @click="shareProfile">Share Profile</button>
+          <button @click="vibrateDevice">Vibrate</button>
+        </div>
+      </div>
+      <div class="mt-20 p-5">
+      </div>
+    </BaseCard>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+.user-profile {
+ .header-cover {
+   background-image: url("../../../images/photo-wide-5.jpeg") ;
+   position: relative;
+   background-size: cover;
+   background-repeat: no-repeat;
+   height: 300px;
+ }
+  &::after {
+    content: "";
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    background: rgba(0,0,0,.1)
+  }
+}
+
+
+
+.timeline {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  
+  li.timeline-item {
+      position: relative;
+      width: 50%;
+      display: inline-block;
+      
+      &:nth-child(even) {
+          padding: 0 3rem 3rem 0;
+          .timeline-badge {
+              left: calc(100% - 24px);
+          }
+      }
+      &:nth-child(odd) {
+          float: right;
+          padding: 0 0 3rem 3rem;
+          margin-top: 6rem;
+          .timeline-badge {
+              right: calc(100% - 24px);
+          }
+      }
+      .timeline-badge {
+          position: absolute;
+          width: 48px;
+          height: 48px;
+      }
+      .badge-icon {
+          display: inline-block;
+          text-align: center;
+          font-size: 22px;
+          border-radius: 50%;
+          height: 100%;
+          width: 100%;
+          line-height: 48px;
+      }
+      .badge-img {
+          display: inline-block;
+          border-radius: 50%;
+          height: 100%;
+          width: 100%;
+      }
+  }
+  li.timeline-group {
+      position: relative;
+      z-index: 99;
+      padding: 0 0 2rem 0;
+  }
+  .timeline-line {
+      position: absolute;
+      content: "";
+      width: 1px;
+      height: 100%;
+      background: #D1D5DB;
+      left: 0;
+      right: 0;
+      margin: auto;
+  }
+}
+@media (max-width: 767px) {
+  .user-profile {
+      .header-cover {
+          height: 200px;
+      }
+  }
+  
+  .timeline {
+      .timeline-line {
+        display: none !important;
+      }
+      li.timeline-item {
+          width: 100%;
+          padding: 4rem 0 3rem !important;
+          &:nth-child(odd) {
+              margin-top: 1rem;
+          }
+          .timeline-badge {
+              left: 0 !important;
+              right: 0 !important;
+              top: -16px;
+              margin: auto;
+          }
+      }
+      
+      li.timeline-group {
+          padding: 0 0 3rem;
+      }
+  }
+}
+
+
+
+</style>
